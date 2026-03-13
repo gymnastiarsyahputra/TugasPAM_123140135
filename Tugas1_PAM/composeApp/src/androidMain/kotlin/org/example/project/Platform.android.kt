@@ -7,6 +7,3 @@ class AndroidPlatform : Platform {
 }
 
 actual fun getPlatform(): Platform = AndroidPlatform()
-
-// Implementasi actual untuk fungsi string tadi
-actual fun getPlatformName(): String = "Android"

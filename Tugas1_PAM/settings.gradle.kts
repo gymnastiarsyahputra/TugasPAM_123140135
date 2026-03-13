@@ -1,4 +1,4 @@
-rootProject.name = "Tugas1_PAM"
+rootProject.name = "Tugas1PAM"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {

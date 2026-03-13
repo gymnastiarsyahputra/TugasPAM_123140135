@@ -5,6 +5,3 @@ interface Platform {
 }
 
 expect fun getPlatform(): Platform
-
-// Hapus
-expect fun getPlatformName(): String
