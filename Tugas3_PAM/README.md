@@ -29,8 +29,4 @@ Proyek ini menggunakan struktur standar *Kotlin Multiplatform Wizard*. Pastikan 
 4. Klik tombol **Run**.
 5. Aplikasi akan di-*build* dan diinstal ke dalam emulator Android.
 
-## 📸 Tangkapan Layar (Screenshots)
 
-*Berikut adalah tampilan aplikasi saat dijalankan:*
-
-![Screenshot Aplikasi Desktop/Android](TampilanHasil.png)
