@@ -1,40 +1,36 @@
-This is a Kotlin Multiplatform project targeting Android, Desktop (JVM).
+# Tugas Praktikum 3 PAM - My Profile App
 
-* [/composeApp](./composeApp/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./composeApp/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./composeApp/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./composeApp/src/jvmMain/kotlin)
-    folder is the appropriate location.
+Repositori ini berisi implementasi tugas praktikum pertemuan 3 mata kuliah Pengembangan Aplikasi Mobile (PAM), Program Studi Teknik Informatika, Institut Teknologi Sumatera (ITERA). Aplikasi ini dibangun menggunakan **Compose Multiplatform** dengan target sistem Android dan Desktop.
 
-### Build and Run Android Application
+## 📱 Deskripsi Aplikasi
+"My Profile App" adalah aplikasi antarmuka pengguna (UI) yang menampilkan halaman profil interaktif. Proyek ini mendemonstrasikan pemahaman mengenai:
+- Paradigma UI Deklaratif menggunakan Kotlin.
+- Implementasi *Basic Layouts* (`Column`, `Row`, `Box`).
+- Penggunaan komponen UI standar seperti `Text`, `Button`, `Card`, dan `Icon`.
+- Penataan elemen menggunakan *Modifier chain*.
+- Pembuatan *Reusable Composable Functions* (`ProfileHeader`, `ProfileCard`, `InfoItem`).
+- **Bonus:** Implementasi animasi menggunakan state dan `AnimatedVisibility`.
 
-To build and run the development version of the Android app, use the run configuration from the run widget
-in your IDE’s toolbar or build it directly from the terminal:
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:assembleDebug
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:assembleDebug
-  ```
+## 🚀 Cara Menjalankan Aplikasi (Android Studio)
 
-### Build and Run Desktop (JVM) Application
+Proyek ini menggunakan struktur standar *Kotlin Multiplatform Wizard*. Pastikan Anda telah menginstal Android Studio versi terbaru dan JDK 17+.
 
-To build and run the development version of the desktop app, use the run configuration from the run widget
-in your IDE’s toolbar or run it directly from the terminal:
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:run
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:run
-  ```
+### Menjalankan Target Desktop (Lebih Cepat)
+1. Buka proyek ini di Android Studio.
+2. Tunggu proses *Gradle Sync* dan *Indexing* selesai secara penuh.
+3. Pada bilah atas Android Studio (panel konfigurasi sebelah tombol Run/Play hijau), klik *dropdown* dan ubah opsi dari `composeApp` menjadi **`desktopApp`**.
+4. Klik tombol **Run** (segitiga hijau) atau tekan `Shift + F10`.
+5. Jendela aplikasi desktop akan otomatis muncul.
 
----
+### Menjalankan Target Android
+1. Buka proyek ini di Android Studio.
+2. Siapkan dan jalankan *Android Emulator* (AVD) melalui Device Manager.
+3. Pada bilah konfigurasi di atas, pastikan target yang terpilih adalah **`composeApp`**.
+4. Klik tombol **Run**.
+5. Aplikasi akan di-*build* dan diinstal ke dalam emulator Android.
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+## 📸 Tangkapan Layar (Screenshots)
+
+*Berikut adalah tampilan aplikasi saat dijalankan:*
+
+![Screenshot Aplikasi Desktop/Android](TampilanHasil.png)
