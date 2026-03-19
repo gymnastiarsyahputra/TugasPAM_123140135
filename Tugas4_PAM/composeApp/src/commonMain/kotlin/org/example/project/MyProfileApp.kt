@@ -135,9 +135,9 @@ fun ProfileCard() {
         ) {
             // Menampilkan list informasi [cite: 626]
             InfoItem(icon = Icons.Default.Email, text = "zans@student.itera.ac.id")
-            Divider(color = Color(0xFFF3F4F6))
+            HorizontalDivider(color = Color(0xFFF3F4F6))
             InfoItem(icon = Icons.Default.Phone, text = "+62 812-3456-7890")
-            Divider(color = Color(0xFFF3F4F6))
+            HorizontalDivider(color = Color(0xFFF3F4F6))
             InfoItem(icon = Icons.Default.LocationOn, text = "Jati Agung, Lampung")
         }
     }
