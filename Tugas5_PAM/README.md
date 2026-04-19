@@ -1,12 +1,40 @@
-# Tugas Praktikum 5 PAM - Notes App Navigation
+This is a Kotlin Multiplatform project targeting Android, Desktop (JVM).
 
-Repositori ini berisi implementasi Tugas Praktikum Pertemuan 5 mata kuliah Pengembangan Aplikasi Mobile (PAM), Program Studi Teknik Informatika, Institut Teknologi Sumatera (ITERA). Proyek ini berfokus pada implementasi navigasi multi-layar menggunakan Jetpack Navigation di Compose Multiplatform.
+* [/composeApp](./composeApp/src) is for code that will be shared across your Compose Multiplatform applications.
+  It contains several subfolders:
+  - [commonMain](./composeApp/src/commonMain/kotlin) is for code that’s common for all targets.
+  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
+    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
+    the [iosMain](./composeApp/src/iosMain/kotlin) folder would be the right place for such calls.
+    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./composeApp/src/jvmMain/kotlin)
+    folder is the appropriate location.
 
-## 🌟 Fitur dan Pemenuhan Rubrik
-1. **Bottom Navigation (25%)**: Terdapat 3 tab fungsional (Notes, Favorites, Profile) menggunakan `NavigationBar`.
-2. **Navigation with Args (25%)**: Meneruskan argumen `noteId` dari Note List ke halaman Note Detail dan Edit Note secara dinamis.
-3. **Navigation Flow (20%)**: Mendukung navigasi maju dan mundur (*back stack*) dengan rapi menggunakan `popBackStack()` serta manajemen state tab menggunakan `popUpTo` dan `launchSingleTop`.
-4. **Code Structure (20%)**: Menerapkan arsitektur yang rapi dengan pemisahan *package* (`data`, `navigation`, `screens`, `viewmodel`).
-5. **Bonus (+10%)**: Implementasi *Side Menu* menggunakan `ModalNavigationDrawer` yang tersinkronisasi dengan rute aplikasi.
+### Build and Run Android Application
 
+To build and run the development version of the Android app, use the run configuration from the run widget
+in your IDE’s toolbar or build it directly from the terminal:
+- on macOS/Linux
+  ```shell
+  ./gradlew :composeApp:assembleDebug
+  ```
+- on Windows
+  ```shell
+  .\gradlew.bat :composeApp:assembleDebug
+  ```
 
+### Build and Run Desktop (JVM) Application
+
+To build and run the development version of the desktop app, use the run configuration from the run widget
+in your IDE’s toolbar or run it directly from the terminal:
+- on macOS/Linux
+  ```shell
+  ./gradlew :composeApp:run
+  ```
+- on Windows
+  ```shell
+  .\gradlew.bat :composeApp:run
+  ```
+
+---
+
+Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
