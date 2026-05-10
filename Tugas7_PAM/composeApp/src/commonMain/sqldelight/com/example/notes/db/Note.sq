@@ -1,0 +1,33 @@
+-- Membuat Tabel[cite: 5]
+CREATE TABLE Note (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    content TEXT NOT NULL,
+    created_at INTEGER NOT NULL,
+    updated_at INTEGER NOT NULL
+);
+
+-- Read Semua (urut terbaru)[cite: 5]
+selectAll:
+SELECT * FROM Note ORDER BY updated_at DESC;
+
+-- Read by ID[cite: 5]
+selectById:
+SELECT * FROM Note WHERE id = ?;
+
+-- Create[cite: 5]
+insert:
+INSERT INTO Note(title, content, created_at, updated_at)
+VALUES (?, ?, ?, ?);
+
+-- Update[cite: 5]
+update:
+UPDATE Note SET title = ?, content = ?, updated_at = ? WHERE id = ?;
+
+-- Delete[cite: 5]
+delete:
+DELETE FROM Note WHERE id = ?;
+
+-- Search Notes[cite: 5]
+search:
+SELECT * FROM Note WHERE title LIKE '%' || ? || '%' OR content LIKE '%' || ? || '%';
