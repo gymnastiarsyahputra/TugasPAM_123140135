@@ -30,6 +30,11 @@ kotlin {
             implementation("app.cash.sqldelight:runtime:2.0.1")
             implementation("app.cash.sqldelight:coroutines-extensions:2.0.1")
             implementation("app.cash.sqldelight:android-driver:2.0.1")
+
+            // Tambahkan Koin Android [cite: 159, 160, 161, 162]
+            implementation("io.insert-koin:koin-android:3.5.3")
+            implementation("io.insert-koin:koin-androidx-compose:3.5.3")
+
         }
         commonMain.dependencies {
             implementation(libs.compose.runtime)
@@ -42,6 +47,10 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(libs.navigation.compose)
             implementation(compose.materialIconsExtended)
+
+            // Koin Core & Compose [cite: 155, 156, 157, 158]
+            implementation("io.insert-koin:koin-core:3.5.3")
+            implementation("io.insert-koin:koin-compose:1.1.2")
 
             // 1. Multiplatform Settings (Untuk DataStore/Preferences)
             implementation("com.russhwolf:multiplatform-settings:1.1.1")

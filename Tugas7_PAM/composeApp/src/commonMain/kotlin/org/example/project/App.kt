@@ -20,16 +20,20 @@ import org.example.project.screens.SettingsScreen
 import org.example.project.viewmodel.NotesViewModel
 
 @Composable
-fun App(driverFactory: DatabaseDriverFactory, settingsManager: SettingsManager) {
-    // Membaca pengaturan tema dari DataStore
+fun App() {
+    // 1. Ambil mesinnya dari Koin secara otomatis (tanpa parameter!)
+    val settingsManager: org.example.project.data.SettingsManager = org.koin.compose.koinInject()
+    val viewModel: org.example.project.viewmodel.NotesViewModel = org.koin.compose.koinInject()
+
+    // 2. Baca pengaturan tema menggunakan mesin yang sudah diambil
     val theme by settingsManager.themeFlow.collectAsState(initial = "light")
 
+    // 3. Terapkan temanya ke MaterialTheme
     MaterialTheme(
         colorScheme = if (theme == "dark") darkColorScheme() else lightColorScheme()
     ) {
-        val database = remember { NotesDatabase(driverFactory.createDriver()) }
-        val repository = remember { NoteRepository(database) }
-        val viewModel = remember { NotesViewModel(repository) }
+        // ... (Biarkan kode NavHost / UI kamu di bawah sini tetap sama seperti sebelumnya)
+        val viewModel: org.example.project.viewmodel.NotesViewModel = org.koin.compose.koinInject()
         val navController = rememberNavController()
 
         NavHost(navController = navController, startDestination = "home") {

@@ -5,6 +5,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.CloudOff
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
@@ -46,6 +47,10 @@ fun NotesScreen(
         }
     ) { padding ->
         Column(modifier = Modifier.padding(padding).fillMaxSize()) {
+            // 1. TAMPILKAN INDIKATOR JARINGAN DI SINI (Paling Atas)
+            NetworkStatusIndicator()
+
+            // 2. Kolom Pencarian
             OutlinedTextField(
                 value = searchQuery,
                 onValueChange = { viewModel.searchNotes(it) },
@@ -81,6 +86,29 @@ fun NoteItem(note: Note, onDelete: () -> Unit) {
             IconButton(onClick = onDelete) {
                 Icon(Icons.Default.Delete, contentDescription = "Delete")
             }
+        }
+    }
+}
+
+@Composable
+fun NetworkStatusIndicator() {
+    val networkMonitor: org.example.project.NetworkMonitor = org.koin.compose.koinInject()
+    val isConnected by networkMonitor.observeConnectivity().collectAsState(initial = true)
+
+    // Kita copot animasinya sementara untuk testing
+    Surface(
+        modifier = Modifier.fillMaxWidth(),
+        color = if (isConnected) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.errorContainer
+    ) {
+        Row(
+            modifier = Modifier.padding(8.dp),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = if (isConnected) "✅ Internet NYALA" else "⚠️ Tidak Ada Koneksi Internet",
+                color = if (isConnected) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onErrorContainer,
+                style = MaterialTheme.typography.bodyMedium
+            )
         }
     }
 }

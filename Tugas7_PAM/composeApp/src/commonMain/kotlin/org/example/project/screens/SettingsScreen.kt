@@ -16,7 +16,12 @@ import org.example.project.data.SettingsManager
 fun SettingsScreen(
     settingsManager: SettingsManager,
     onNavigateBack: () -> Unit
-) {
+) { // <-- Kurung tutup parameter di sini
+
+    // 1. Panggil mesin Koin-nya di DALAM badan fungsi
+    val deviceInfo: org.example.project.DeviceInfo = org.koin.compose.koinInject()
+    val batteryInfo: org.example.project.BatteryInfo = org.koin.compose.koinInject()
+
     // Ambil tema saat ini secara real-time
     val theme by settingsManager.themeFlow.collectAsState(initial = "system")
     val scope = rememberCoroutineScope()
@@ -37,6 +42,7 @@ fun SettingsScreen(
             Text("App Theme", style = MaterialTheme.typography.titleMedium)
             Spacer(modifier = Modifier.height(8.dp))
 
+            // Baris untuk tombol tema
             Row(verticalAlignment = Alignment.CenterVertically) {
                 RadioButton(
                     selected = theme == "light",
@@ -49,6 +55,26 @@ fun SettingsScreen(
                     onClick = { scope.launch { settingsManager.setTheme("dark") } }
                 )
                 Text("Dark")
+            } // <-- Row ditutup di sini
+
+            // 2. Info perangkat ditaruh di bawah Row
+            Spacer(modifier = Modifier.height(24.dp))
+            Text(
+                text = "Informasi Perangkat (Bonus Tugas 8)",
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.primary
+            )
+
+            Card(
+                modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)
+            ) {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Text(text = "📱 Model HP: ${deviceInfo.getDeviceName()}")
+                    Text(text = "⚙️ OS: ${deviceInfo.getOsVersion()}")
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(text = "🔋 Sisa Baterai: ${batteryInfo.getBatteryLevel()}%")
+                    Text(text = "⚡ Status: ${if (batteryInfo.isCharging()) "Sedang Dicas" else "Tidak Dicas"}")
+                }
             }
         }
     }
