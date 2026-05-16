@@ -54,3 +54,7 @@ actual class BatteryInfo(private val context: Context) {
         return status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL
     }
 }
+
+actual object ApiConfig {
+    actual val geminiApiKey: String = BuildConfig.GEMINI_API_KEY
+}

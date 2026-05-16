@@ -17,3 +17,9 @@ actual class BatteryInfo {
     actual fun getBatteryLevel(): Int = 100
     actual fun isCharging(): Boolean = true
 }
+
+// Tambahkan di bagian bawah file PlatformApis.jvm.kt
+actual object ApiConfig {
+    // Karena desktop nggak pakai local.properties Android, kita kasih string kosong aja sementara
+    actual val geminiApiKey: String = ""
+}

@@ -11,7 +11,17 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import org.example.project.data.NoteRepository
 
-class NotesViewModel(private val repository: NoteRepository) : ViewModel() {
+class NotesViewModel(
+    private val repository: org.example.project.data.NoteRepository,
+    private val aiRepository: org.example.project.data.AIRepository
+) : ViewModel() {
+
+    // --- STATE UNTUK AI SUMMARY ---
+    private val _summaryResult = MutableStateFlow<String?>(null)
+    val summaryResult = _summaryResult.asStateFlow()
+
+    private val _isSummarizing = MutableStateFlow(false)
+    val isSummarizing = _isSummarizing.asStateFlow()
 
     // 1. Mengambil data dari database secara real-time (Flow)
     val notes: StateFlow<List<Note>> = repository.getAllNotes()
@@ -29,6 +39,27 @@ class NotesViewModel(private val repository: NoteRepository) : ViewModel() {
         viewModelScope.launch {
             repository.insertNote(title, content)
         }
+    }
+
+    // Fungsi eksekusi rangkuman
+    fun summarizeNote(content: String) {
+        viewModelScope.launch {
+            _isSummarizing.value = true
+            _summaryResult.value = null // Kosongkan hasil yang lama
+
+            // Memanggil AI dari repository
+            aiRepository.summarize(content).onSuccess { result ->
+                _summaryResult.value = result
+            }.onFailure { error ->
+                _summaryResult.value = "Gagal merangkum: ${error.message}"
+            }
+
+            _isSummarizing.value = false
+        }
+    }
+
+    fun clearSummary() {
+        _summaryResult.value = null
     }
 
     fun updateNote(id: Long, title: String, content: String) {
