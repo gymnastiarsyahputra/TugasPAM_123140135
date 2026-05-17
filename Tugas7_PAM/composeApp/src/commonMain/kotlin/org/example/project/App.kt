@@ -33,7 +33,6 @@ fun App() {
         colorScheme = if (theme == "dark") darkColorScheme() else lightColorScheme()
     ) {
         // ... (Biarkan kode NavHost / UI kamu di bawah sini tetap sama seperti sebelumnya)
-        val viewModel: org.example.project.viewmodel.NotesViewModel = org.koin.compose.koinInject()
         val navController = rememberNavController()
 
         NavHost(navController = navController, startDestination = "home") {

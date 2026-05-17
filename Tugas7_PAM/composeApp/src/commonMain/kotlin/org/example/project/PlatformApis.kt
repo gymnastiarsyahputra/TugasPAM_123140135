@@ -19,3 +19,7 @@ expect class BatteryInfo {
     fun getBatteryLevel(): Int
     fun isCharging(): Boolean
 }
+
+expect object ApiConfig {
+    val geminiApiKey: String
+}

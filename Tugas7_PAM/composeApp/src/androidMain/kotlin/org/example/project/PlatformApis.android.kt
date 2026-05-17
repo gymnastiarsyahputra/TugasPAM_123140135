@@ -11,6 +11,7 @@ import android.net.NetworkCapabilities
 import android.os.BatteryManager
 import android.os.Build
 import androidx.annotation.RequiresPermission
+import com.russhwolf.settings.BuildConfig
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -53,4 +54,8 @@ actual class BatteryInfo(private val context: Context) {
         val status = intent?.getIntExtra(BatteryManager.EXTRA_STATUS, -1) ?: -1
         return status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL
     }
+}
+
+actual object ApiConfig {
+        actual val geminiApiKey: String = "" // Bypass sementara untuk fokus testing
 }

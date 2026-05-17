@@ -1,23 +1,44 @@
 package org.example.project
 
-import org.koin.core.module.Module
-import org.koin.dsl.module
 import com.example.notes.db.NotesDatabase
+import io.ktor.client.HttpClient
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.json.Json
+import org.example.project.data.AIRepository
+import org.example.project.data.AIRepositoryImpl
+import org.example.project.data.DatabaseDriverFactory
+import org.example.project.data.GeminiService
 import org.example.project.data.NoteRepository
 import org.example.project.viewmodel.NotesViewModel
-// Tambahkan import lain jika ada yang merah
+import org.koin.core.scope.get
+import org.koin.dsl.module
 
-// Deklarasi bahwa setiap platform akan punya modul tambahannya sendiri
-expect val platformModule: Module
-
-// Modul utama yang dipakai bersama
-val commonModule = module {
-    // 1. Membuat Database (mengambil supir dari platformModule secara otomatis)
-    single { NotesDatabase(get<org.example.project.data.DatabaseDriverFactory>().createDriver()) }
-
-    // 2. Membuat Repository
+// 1. Modul khusus untuk urusan Data, Database, dan Jaringan AI
+val dataModule = module {
+    // Database & Repository
+    single { NotesDatabase(get<DatabaseDriverFactory>().createDriver()) }
     single { NoteRepository(get()) }
 
-    // 3. Membuat ViewModel
-    factory { NotesViewModel(get()) }
+    // AI & Network
+    single {
+        HttpClient {
+            install(ContentNegotiation) {
+                json(Json {
+                    ignoreUnknownKeys = true
+                    isLenient = true
+                })
+            }
+        }
+    }
+    single { GeminiService(get()) }
+    single<AIRepository> { AIRepositoryImpl(get()) }
 }
+
+// 2. Modul khusus untuk mengatur UI (ViewModel)
+val viewModelModule = module {
+    factory { NotesViewModel(repository = get(), aiRepository = get()) }
+}
+
+// 3. Gabungkan semua modul menjadi satu paket
+val allModules = listOf(dataModule, viewModelModule)

@@ -14,7 +14,7 @@ class MainActivity : ComponentActivity() {
             // Menyalakan Koin khusus untuk platform Android
             KoinApplication(application = {
                 androidContext(applicationContext)
-                modules(commonModule, platformModule)
+                modules(allModules + platformModule)
             }) {
                 // UI Utama dipanggil tanpa perlu parameter apa-apa lagi!
                 App()
